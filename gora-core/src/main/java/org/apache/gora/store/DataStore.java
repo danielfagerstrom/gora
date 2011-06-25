@@ -52,38 +52,38 @@ public interface DataStore<K, T extends Persistent> extends Closeable,
    * @param properties extra metadata
    * @throws IOException
    */
-  void initialize(Class<K> keyClass, Class<T> persistentClass,
+  public abstract void initialize(Class<K> keyClass, Class<T> persistentClass,
       Properties properties) throws IOException;
 
   /**
    * Sets the class of the keys
    * @param keyClass the class of keys
    */
-  void setKeyClass(Class<K> keyClass);
+  public abstract void setKeyClass(Class<K> keyClass);
 
   /**
    * Returns the class of the keys
    * @return class of the keys
    */
-  Class<K> getKeyClass();
+  public abstract Class<K> getKeyClass();
 
   /**
    * Sets the class of the persistent objects
    * @param persistentClass class of persistent objects
    */
-  void setPersistentClass(Class<T> persistentClass);
+  public abstract void setPersistentClass(Class<T> persistentClass);
 
   /**
    * Returns the class of the persistent objects
    * @return class of the persistent objects
    */
-  Class<T> getPersistentClass();
+  public abstract Class<T> getPersistentClass();
 
   /**
    * Returns the schema name given to this DataStore
    * @return schema name
    */
-  String getSchemaName();
+  public abstract String getSchemaName();
 
   /**
    * Creates the optional schema or table (or similar) in the datastore
@@ -91,26 +91,26 @@ public interface DataStore<K, T extends Persistent> extends Closeable,
    * or the underlying data model does not support
    * or need this operation, the operation is ignored.
    */
-  void createSchema() throws IOException;
+  public abstract void createSchema() throws IOException;
 
   /**
    * Deletes the underlying schema or table (or similar) in the datastore
    * that holds the objects. This also deletes all the data associated with
    * the schema.
    */
-  void deleteSchema() throws IOException;
+  public abstract void deleteSchema() throws IOException;
 
   /**
    * Deletes all the data associated with the schema, but keeps the
    * schema (table or similar) intact.
    */
-  void truncateSchema() throws IOException;
+  public abstract void truncateSchema() throws IOException;
 
   /**
    * Returns whether the schema that holds the data exists in the datastore.
    * @return whether schema exists
    */
-  boolean schemaExists() throws IOException;
+  public abstract boolean schemaExists() throws IOException;
 
   /**
    * Returns a new instance of the key object. If the object cannot be instantiated 
@@ -119,20 +119,20 @@ public interface DataStore<K, T extends Persistent> extends Closeable,
    * make sure that the key class has a no-arg constructor.   
    * @return a new instance of the key object.
    */
-  K newKey() throws IOException;
+  public abstract K newKey() throws IOException;
 
   /**
    * Returns a new instance of the managed persistent object.
    * @return a new instance of the managed persistent object.
    */
-  T newPersistent() throws IOException;
+  public abstract T newPersistent() throws IOException;
 
   /**
    * Returns the object corresponding to the given key fetching all the fields.
    * @param key the key of the object
    * @return the Object corresponding to the key or null if it cannot be found
    */
-  T get(K key) throws IOException;
+  public abstract T get(K key) throws IOException;
 
   /**
    * Returns the object corresponding to the given key.
@@ -140,39 +140,39 @@ public interface DataStore<K, T extends Persistent> extends Closeable,
    * @param fields the fields required in the object. Pass null, to retrieve all fields
    * @return the Object corresponding to the key or null if it cannot be found
    */
-  T get(K key, String[] fields) throws IOException;
+  public abstract T get(K key, String[] fields) throws IOException;
 
   /**
    * Inserts the persistent object with the given key.
    */
-  void put(K key, T obj) throws IOException;
+  public abstract void put(K key, T obj) throws IOException;
 
   /**
    * Deletes the object with the given key
    * @param key the key of the object
    * @return whether deleted the object successfuly
    */
-  boolean delete(K key) throws IOException;
+  public abstract boolean delete(K key) throws IOException;
 
   /**
    * Deletes all the objects matching the query.
    * @param query matching records to this query will be deleted
    * @return number of deleted records
    */
-  long deleteByQuery(Query<K, T> query) throws IOException;
+  public abstract long deleteByQuery(Query<K, T> query) throws IOException;
 
   /**
    * Executes the given query and returns the results.
    * @param query the query to execute.
    * @return the results as a {@link Result} object.
    */
-  Result<K,T> execute(Query<K, T> query) throws IOException;
+  public abstract Result<K,T> execute(Query<K, T> query) throws IOException;
 
   /**
    * Constructs and returns a new Query.
    * @return a new Query.
    */
-  Query<K, T> newQuery();
+  public abstract Query<K, T> newQuery();
 
   /**
    * Partitions the given query and returns a list of {@link PartitionQuery}s,
@@ -182,34 +182,39 @@ public interface DataStore<K, T extends Persistent> extends Closeable,
    * (returning every object)
    * @return a List of PartitionQuery's
    */
-  List<PartitionQuery<K,T>> getPartitions(Query<K,T> query)
+  public abstract List<PartitionQuery<K,T>> getPartitions(Query<K,T> query)
     throws IOException;
 
   /**
    * Forces the write caches to be flushed.
    */
-  void flush() throws IOException;
+  public abstract void flush() throws IOException;
 
   /**
    * Sets the {@link BeanFactory} to use by the DataStore.
    * @param beanFactory the BeanFactory to use
    */
-  void setBeanFactory(BeanFactory<K,T> beanFactory);
+  public abstract void setBeanFactory(BeanFactory<K,T> beanFactory);
 
   /**
    * Returns the BeanFactory used by the DataStore
    * @return the BeanFactory used by the DataStore
    */
-  BeanFactory<K,T> getBeanFactory();
+  public abstract BeanFactory<K,T> getBeanFactory();
 
-  void close() throws IOException;
+  @Override
+  public abstract void close() throws IOException;
 
-  Configuration getConf();
+  @Override
+  public Configuration getConf();
 
-  void setConf(Configuration conf);
+  @Override
+  public void setConf(Configuration conf);
 
-  void readFields(DataInput in) throws IOException;
+  @Override
+  public void readFields(DataInput in) throws IOException;
 
-  void write(DataOutput out) throws IOException;
+  @Override
+  public void write(DataOutput out) throws IOException;
 
 }

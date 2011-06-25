@@ -26,12 +26,12 @@ import java.util.Map;
  */
 public interface StatefulMap<K, V> extends Map<K, V> {
 
-  State getState(K key);
+  public abstract State getState(K key);
   
-  void putState(K key, State state);
+  public abstract void putState(K key, State state);
 
-  Map<K, State> states();
+  public abstract Map<K, State> states();
 
-  void clearStates();
+  public abstract void clearStates();
   
 }

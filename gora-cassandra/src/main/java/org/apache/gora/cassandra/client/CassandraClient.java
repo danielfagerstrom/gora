@@ -26,26 +26,29 @@ import org.apache.cassandra.thrift.TokenRange;
 
 public interface CassandraClient {
 
-  void setKeySpace(String keySpace);
+  public void setKeySpace(String keySpace);
 
-  void setConsistencyLevel(ConsistencyLevel level);
+  public void setConsistencyLevel(ConsistencyLevel level);
 
-  Row get(String key, Select select) throws IOException;
+  public Row get(String key, Select select) throws IOException;
 
-  RowIterable getRange(String startKey, String endKey, int rowCount, Select select) 
-    throws IOException;
+  public RowIterable getRange(String startKey, String endKey, int rowCount,
+      Select select)
+  throws IOException;
 
-  RowIterable getTokenRange(String startToken, String endToken,
-      int rowCount, Select select) throws IOException;
+  public RowIterable getTokenRange(String startToken, String endToken,
+      int rowCount, Select select)
+  throws IOException;
 
-  void mutate(String key, Mutate mutation) throws IOException;
+  public void mutate(String key, Mutate mutation) throws IOException;
 
-  Map<String, Map<String, String>> describeKeySpace() throws IOException;
+  public Map<String, Map<String, String>> describeKeySpace()
+  throws IOException;
 
-  List<TokenRange> describeRing() throws IOException;
+  public List<TokenRange> describeRing() throws IOException;
 
-  List<String> describeSplits(String startToken, String endToken, int size)
-    throws IOException;
+  public List<String> describeSplits(String startToken, String endToken, int size)
+  throws IOException;
 
-  void close();
+  public void close();
 }

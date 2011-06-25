@@ -37,81 +37,117 @@ public interface Query<K, T extends Persistent> extends Writable, Configurable {
    * method only if you know what you are doing.
    * @param dataStore the dataStore of the query
    */
-  void setDataStore(DataStore<K,T> dataStore);
+  public abstract void setDataStore(DataStore<K,T> dataStore);
   
   /**
    * Returns the DataStore, that this Query is associated with.
    * @return the DataStore of the Query
    */
-  DataStore<K,T> getDataStore();
+  public abstract DataStore<K,T> getDataStore();
   
   /**
    * Executes the Query on the DataStore and returns the results.
    * @return the {@link Result} for the query.
    */
-  Result<K,T> execute() throws IOException;
+  public abstract Result<K,T> execute() throws IOException;
   
 //  /**
 //   * Compiles the query for performance and error checking. This 
 //   * method is an optional optimization for DataStore implementations.
 //   */
-//  void compile();
+//  public abstract void compile();
 //  
 //  /**
 //   * Sets the query string
 //   * @param queryString the query in String
 //   */
-//  void setQueryString(String queryString);
+//  public abstract void setQueryString(String queryString);
 //  
 //  /**
 //   * Returns the query string
 //   * @return the query as String
 //   */
-//  String getQueryString();
+//  public abstract String getQueryString();
 
   /* Dimension : fields */
-  void setFields(String... fieldNames);
+  public abstract void setFields(String... fieldNames);
 
-  String[] getFields();
+  public abstract String[] getFields();
 
   /* Dimension : key */ 
-  void setKey(K key);
+  public abstract void setKey(K key);
 
-  void setStartKey(K startKey);
+  public abstract void setStartKey(K startKey);
 
-  void setEndKey(K endKey);
+  public abstract void setEndKey(K endKey);
 
-  void setKeyRange(K startKey, K endKey);
+  public abstract void setKeyRange(K startKey, K endKey);
 
-  K getKey();
+  public abstract K getKey();
 
-  K getStartKey();
+  public abstract K getStartKey();
 
-  K getEndKey();
+  public abstract K getEndKey();
   
   /* Dimension : time */
-  void setTimestamp(long timestamp);
+  public abstract void setTimestamp(long timestamp);
 
-  void setStartTime(long startTime);
+  public abstract void setStartTime(long startTime);
 
-  void setEndTime(long endTime);
+  public abstract void setEndTime(long endTime);
 
-  void setTimeRange(long startTime, long endTime);
+  public abstract void setTimeRange(long startTime, long endTime);
 
-  long getTimestamp();
+  public abstract long getTimestamp();
 
-  long getStartTime();
+  public abstract long getStartTime();
 
-  long getEndTime();
+  public abstract long getEndTime();
+
+//  public abstract void setFilter(String filter);
+//  
+//  public abstract String getFilter();
   
   /**
    * Sets the maximum number of results to return.
    */
-  void setLimit(long limit);
+  public abstract void setLimit(long limit);
 
   /**
    * Returns the maximum number of results
    * @return the limit if it is set, otherwise a negative number
    */
-  long getLimit();
+  public abstract long getLimit();
+
+  /* parameters */
+  /*
+  public abstract void setParam(int paramIndex, int value);
+  
+  public abstract void setParam(String paramName, int value);
+  
+  public abstract void setParam(int paramIndex, long value);
+  
+  public abstract void setParam(String paramName, long value);
+  
+  public abstract void setParam(int paramIndex, String value);
+  
+  public abstract void setParam(String paramName, String value);
+  
+  public abstract void setParam(int paramIndex, boolean value);
+  
+  public abstract void setParam(String paramName, boolean value);
+  
+  public abstract void setParam(int paramIndex, double value);
+  
+  public abstract void setParam(String paramName, double value);
+  
+  public abstract void setParam(int paramIndex, char value);
+  
+  public abstract void setParam(String paramName, char value);
+  
+  public abstract void setParam(int paramIndex, Date value);
+  
+  public abstract void setParam(String paramName, Date value);
+  */
+    
 }

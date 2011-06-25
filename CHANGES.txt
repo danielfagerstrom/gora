@@ -1,12 +1,8 @@
 Gora Change Log
 
-Trunk (unreleased changes):
+0.1.1-incubating release:
 
-* GORA-32. Map type with long values generates non-compilable Java class (Yves Langisch)
-
-* GORA-29. Gora maven support (Ioannis Canellos via mattmann)
-
-* GORA-31. jersey-json dependency not in repositories currently in ivysettings.xml (Marsall Pierce via hsaputra)
+* GORA-25 Upgrade Gora-hbase to HBase 0.90.0 (ab via mattmann)
 
 0.1-incubating release:
 
@@ -30,4 +26,3 @@ Trunk (unreleased changes):
 
 *  GORA-23. Limit result set in store reads (Alexis Detreglode via hsaputra)
 
-*  GORA-25. Upgrade Gora-hbase to HBase 0.90.0 (ab)

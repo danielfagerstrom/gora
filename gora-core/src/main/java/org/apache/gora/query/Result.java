@@ -35,56 +35,56 @@ public interface Result<K,T extends Persistent> extends Closeable {
    * Returns the DataStore, that this Result is associated with.
    * @return the DataStore of the Result
    */
-  DataStore<K,T> getDataStore();
+  public abstract DataStore<K,T> getDataStore();
   
   /**
    * Returns the Query object for this Result.
    * @return the Query object for this Result.
    */
-  Query<K, T> getQuery();
+  public abstract Query<K, T> getQuery();
   
   /**
    * Advances to the next element and returns false if at end.
    * @return true if end is not reached yet
    */
-  boolean next() throws IOException;
+  public abstract boolean next() throws IOException;
   
   /**
    * Returns the current key.
    * @return current key
    */
-  K getKey();
+  public abstract K getKey();
   
   /**
    * Returns the current object.
    * @return current object
    */
-  T get();
+  public abstract T get();
   
   /**
    * Returns the class of the keys
    * @return class of the keys
    */
-  Class<K> getKeyClass();
+  public abstract Class<K> getKeyClass();
     
   /**
    * Returns the class of the persistent objects
    * @return class of the persistent objects
    */
-  Class<T> getPersistentClass();
+  public abstract Class<T> getPersistentClass();
   
   /**
    * Returns the number of times next() is called with return value true.
    * @return the number of results so far
    */
-  long getOffset();
+  public long getOffset();
   
   /**
    * Returns how far along the result has iterated, a value between 0 and 1.
    */
-  float getProgress() throws IOException;
+  public float getProgress() throws IOException;
   
   @Override
-  void close() throws IOException;
+  public abstract void close() throws IOException;
   
 }

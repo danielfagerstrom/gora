@@ -53,11 +53,6 @@
       pattern="${maven2.pattern.ext}"
       m2compatible="true"
       />
-    <ibiblio name="java.net-maven2" 
-      root="http://download.java.net/maven/2/" 
-      pattern="${maven2.pattern.ext}" 
-      m2compatible="true" 
-    /> 
     <ibiblio name="apache-snapshot"
       root="${snapshot.apache.org}"
       pattern="${maven2.pattern.ext}"
@@ -74,7 +69,6 @@
       <resolver ref="local"/>
       <resolver ref="maven2-local"/>
       <resolver ref="maven2"/>
-      <resolver ref="java.net-maven2"/>
     </chain>
     <chain name="internal">
       <resolver ref="local"/>
